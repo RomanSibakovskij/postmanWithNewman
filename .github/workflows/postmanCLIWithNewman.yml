@@ -7,10 +7,7 @@ env:
 
 jobs:
   automated-api-tests:
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js
@@ -33,9 +30,9 @@ jobs:
         shell: bash
       - name: Run API test
         run: |
-          newman run collection.json -e environment.json --reporters cli,htmlextra --reporter-htmlextra-export report-${{ matrix.os }}.html
+          newman run collection.json -e environment.json --reporters cli,htmlextra --reporter-htmlextra-export report.html
       - name: Upload report
         uses: actions/upload-artifact@v4
         with:
-          name: newman-report-${{ matrix.os }}
-          path: report-${{ matrix.os }}.html
+          name: newman-report
+          path: report.html
