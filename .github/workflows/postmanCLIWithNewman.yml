@@ -24,7 +24,7 @@ jobs:
             -H "X-Api-Key: ${POSTMAN_API_KEY}" > collection.json
       - name: Fetch Postman environment
         run: |
-          curl -X GET "https://api.getpostman.com/environments/36297486-cb527ea3-7326-4786-96b1-183fc2f2e3c7" \
+          curl -X GET "https://api.getpostman.com/environments/36297486-855c32fa-357e-41b5-89c0-0db6cfd525aa" \
             -H "X-Api-Key: ${POSTMAN_API_KEY}" > environment.json
       - name: Run API test
         run: |
