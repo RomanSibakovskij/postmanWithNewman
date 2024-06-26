@@ -1,4 +1,4 @@
-name: Automated API tests usign CI piplines threw Postman
+name: Automated API Tests using CI pipelines through Postman
 
 on: push
 
@@ -17,20 +17,18 @@ jobs:
       - name: Install Newman and Newman report
         run: |
           npm install -g newman
-          npm install -g newman-reporter-htmlextra
+          npm install -g newman-reporter-html
       - name: Fetch Postman collection
         run: |
           curl -X GET "https://api.getpostman.com/collections/36297486-d72e22f1-8891-47e0-b716-27f1b27a18db" \
             -H "X-Api-Key: ${POSTMAN_API_KEY}" > collection.json
-        shell: bash
       - name: Fetch Postman environment
         run: |
-          curl -X GET "https://api.getpostman.com/environments/36297486-855c32fa-357e-41b5-89c0-0db6cfd525aa" \
+          curl -X GET "https://api.getpostman.com/environments/36297486-cb527ea3-7326-4786-96b1-183fc2f2e3c7" \
             -H "X-Api-Key: ${POSTMAN_API_KEY}" > environment.json
-        shell: bash
       - name: Run API test
         run: |
-          newman run collection.json -e environment.json --reporters cli,htmlextra --reporter-htmlextra-export report.html
+          newman run collection.json -e environment.json --reporters cli,html --reporter-html-export report.html
       - name: Upload report
         uses: actions/upload-artifact@v4
         with:
